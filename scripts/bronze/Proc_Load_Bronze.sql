@@ -17,7 +17,7 @@ Usage Example:
 ===============================================================================
 */
 
-CREATE OR ALTER proc bronze.load_bronze AS
+CREATE OR ALTER proc silver.load_silver AS
 begin
 	Begin Try
 	Print '==================================';
@@ -28,10 +28,10 @@ begin
 	print 'Loading CRM Tables';
 	Print '----------------------------------';
 
-Print '-->truncating table [bronze].[crm_cust_info]'
-	truncate table  [bronze].[crm_cust_info];
-print 'Inserting table: [bronze].[crm_cust_info]'
-	BULK INSERT [bronze].[crm_cust_info]
+Print '-->truncating table [silver].[crm_cust_info]'
+	truncate table  [silver].[crm_cust_info];
+print 'Inserting table: [silver].[crm_cust_info]'
+	BULK INSERT [silver].[crm_cust_info]
 from 'D:\DDS\sql-data-warehouse-project\sql-data-warehouse-project\datasets\source_crm\cust_info.csv'
 with
 (
@@ -39,10 +39,10 @@ with
 	fieldterminator = ',',
 	TABLOCK	
 )
-Print '--> truncating table [bronze].[crm_prd_info]'
-	truncate table [bronze].[crm_prd_info];
-print 'Inserting table: [bronze].[crm_prd_info]'
-	BULK INSERT [bronze].[crm_prd_info]
+Print '--> truncating table [silver].[crm_prd_info]'
+	truncate table [silver].[crm_prd_info];
+print 'Inserting table: [silver].[crm_prd_info]'
+	BULK INSERT [silver].[crm_prd_info]
 from 'D:\DDS\sql-data-warehouse-project\sql-data-warehouse-project\datasets\source_crm\prd_info.csv'
 with
 (
@@ -50,10 +50,10 @@ with
 	FIELDTERMINATOR = ',',
 	TABLOCK
 )
-Print '--> truncating table [bronze].[crm_sales_details]'
-	truncate table [bronze].[crm_sales_details]
-print 'Inserting table: [bronze].[[crm_sales_details]]'
-	BULK INSERT [bronze].[crm_sales_details]
+Print '--> truncating table [silver].[crm_sales_details]'
+	truncate table [silver].[crm_sales_details]
+print 'Inserting table: [silver].[[crm_sales_details]]'
+	BULK INSERT [silver].[crm_sales_details]
 FROM 'D:\DDS\sql-data-warehouse-project\sql-data-warehouse-project\datasets\source_crm\sales_details.csv'
 WITH 
 (
@@ -64,10 +64,10 @@ WITH
 	Print '----------------------------------';
 	print 'Loading ERP Tables';
 	Print '----------------------------------';
-Print '--> truncating table [bronze].[erp_CUST_AZ12]'
-	truncate table [bronze].[erp_CUST_AZ12];
-print 'Inserting table: [bronze].[erp_CUST_AZ12]'
-	BULK INSERT [bronze].[erp_CUST_AZ12]
+Print '--> truncating table [silver].[erp_CUST_AZ12]'
+	truncate table [silver].[erp_CUST_AZ12];
+print 'Inserting table: [silver].[erp_CUST_AZ12]'
+	BULK INSERT [silver].[erp_CUST_AZ12]
 FROM 'D:\DDS\sql-data-warehouse-project\sql-data-warehouse-project\datasets\source_erp\CUST_AZ12.csv'
 WITH 
 (
@@ -75,20 +75,20 @@ WITH
 	FIELDTERMINATOR = ',',
 	TABLOCK
 )
-Print '--> truncating table [bronze].[erp_LOC_A101]'
-	truncate table [bronze].[erp_LOC_A101]
-print 'Inserting table: [bronze].[erp_LOC_A101]'
-	BULK INSERT [bronze].[erp_LOC_A101]
+Print '--> truncating table [silver].[erp_LOC_A101]'
+	truncate table [silver].[erp_LOC_A101]
+print 'Inserting table: [silver].[erp_LOC_A101]'
+	BULK INSERT [silver].[erp_LOC_A101]
 FROM 'D:\DDS\sql-data-warehouse-project\sql-data-warehouse-project\datasets\source_erp\LOC_A101.csv'
 WITH (
 FIRSTROW = 2 ,
 FIELDTERMINATOR = ',' ,
 TABLOCK
 )
-Print '--> truncating table [bronze].[erp_PX_CAT_G1V2]'
-	truncate table [bronze].[erp_PX_CAT_G1V2]
-print 'Inserting table: [bronze].[erp_PX_CAT_G1V2]'
-BULK INSERT [bronze].[erp_PX_CAT_G1V2]
+Print '--> truncating table [silver].[erp_PX_CAT_G1V2]'
+	truncate table [silver].[erp_PX_CAT_G1V2]
+print 'Inserting table: [silver].[erp_PX_CAT_G1V2]'
+BULK INSERT [silver].[erp_PX_CAT_G1V2]
 FROM 'D:\DDS\sql-data-warehouse-project\sql-data-warehouse-project\datasets\source_erp\PX_CAT_G1V2.csv'
 WITH 
 (
@@ -98,7 +98,7 @@ WITH
 )
 	End Try
 		Begin Catch
-			Print 'Error During Loading Bronze Layer'
+			Print 'Error During Loading silver Layer'
 			Print 'Error Message ' + Error_message();
 			print 'Error Number ' + cast(Error_Number() as char)
 		End Catch
